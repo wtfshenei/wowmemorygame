@@ -3,17 +3,36 @@ const uniqueImages = [
     'monk.png', 'paladin.png', 'priest.png', 'rogue.png', 'shaman.png', 'warlock.png', 'warrior.png'
 ];
 
-// Duplicate each image to have pairs and shuffle the array
-const images = uniqueImages.concat(uniqueImages).sort(() => 0.5 - Math.random());
+// // Duplicate each image to have pairs and shuffle the array
+// const images = uniqueImages.concat(uniqueImages).sort(() => 0.5 - Math.random());
 
 const gameBoard = document.getElementById('game-board');
 const moveCounter = document.getElementById('move-counter');
 const recordScore = document.getElementById('record-score');
+const restartButton = document.getElementById('restart-button');
+const gameOverModal = document.getElementById('game-over-modal');
+const finalMoves = document.getElementById('final-moves');
+const playAgainButton = document.getElementById('play-again-button');
+const closeButton = document.querySelector('.close-button');
+
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
 let moves = 0;
 let matches = 0;
+
+playAgainButton.addEventListener('click', () => {
+    closeGameOverModal();
+    restartGame();
+});
+
+closeButton.addEventListener('click', closeGameOverModal);
+
+window.addEventListener('click', (event) => {
+    if (event.target === gameOverModal) {
+        closeGameOverModal();
+    }
+});
 
 // Load the best score from localStorage
 let bestScore = localStorage.getItem('bestScore');
@@ -24,13 +43,19 @@ if (bestScore !== null) {
 }
 
 // Initialize the game board with cards
-images.forEach(image => {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `<img src="/assets/img/${image}" alt="Image">`;
-    card.addEventListener('click', flipCard);
-    gameBoard.appendChild(card);
-});
+function initializeBoard() {
+    gameBoard.innerHTML = '';
+    const images = uniqueImages.concat(uniqueImages).sort(() => 0.5 - Math.random());
+    images.forEach(image => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `<img src="/assets/img/${image}" alt="Image">`;
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
+    });
+}
+
+initializeBoard();
 
 /**
  * Function to handle card flip
@@ -74,6 +99,7 @@ function disableCards() {
             localStorage.setItem('bestScore', bestScore);
             recordScore.textContent = bestScore.toString();
         }
+        showGameOverModal();
     }
     resetBoard();
 }
@@ -95,4 +121,31 @@ function unflipCards() {
  */
 function resetBoard() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+
+/**
+ * Function to restart the game
+ */
+function restartGame() {
+    moves = 0;
+    matches = 0;
+    moveCounter.textContent = moves.toString();
+    initializeBoard();
+}
+
+restartButton.addEventListener('click', restartGame);
+
+/**
+ * Function to show the game over modal
+ */
+function showGameOverModal() {
+    finalMoves.textContent = moves.toString();
+    gameOverModal.style.display = 'block';
+}
+
+/**
+ * Function to close the game over modal
+ */
+function closeGameOverModal() {
+    gameOverModal.style.display = 'none';
 }

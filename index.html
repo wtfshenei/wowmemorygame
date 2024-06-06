@@ -1,30 +1,43 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>WoW Memory Game</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-    <header>
-        <div class="title">
-            <h1>WoW Memory Game</h1>
-        </div>
-        <div class="score">
-            <h2>Record: <span id="record-score">None</span></h2>
-            <h3>Moves: <span id="move-counter">0</span></h3>
-        </div>
-    </header>
-    <main>
-        <div id="game-board" class="game-board"></div>
-    </main>
-    <footer>
-        <p>Game by <a href="https://github.com/wtfshenei/wowmemorygame" target="_blank">Shenei</a></p>
-        <p>Images by <a href="https://x.com/keyboardturn" target="_blank">Ellie</a></p>
-    </footer>
-    <script src="script.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WoW Memory Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <div class="title">
+        <h1>WoW Memory Game</h1>
+    </div>
+    <div class="score">
+        <h2>Moves: <span id="move-counter">0</span></h2>
+        <h2>Record: <span id="record-score">0</span></h2>
+    </div>
+    <div class="restart-game">
+        <button id="restart-button">Restart Game</button>
+    </div>
+</header>
+<main>
+    <div id="game-board" class="game-board"></div>
+</main>
+<footer>
+    <p>Dev by <a href="https://github.com/wtfshenei" target="_blank">Shenei</a></p>
+    <p>Images by <a href="https://x.com/keyboardturn" target="_blank">Ellie</a></p>
+</footer>
+
+<div id="game-over-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Congratulations!</h2>
+        <p>You completed the game in <span id="final-moves">0</span> moves.</p>
+        <button id="play-again-button">Play Again</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
