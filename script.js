@@ -3,9 +3,6 @@ const uniqueImages = [
     'monk.png', 'paladin.png', 'priest.png', 'rogue.png', 'shaman.png', 'warlock.png', 'warrior.png'
 ];
 
-// // Duplicate each image to have pairs and shuffle the array
-// const images = uniqueImages.concat(uniqueImages).sort(() => 0.5 - Math.random());
-
 const gameBoard = document.getElementById('game-board');
 const moveCounter = document.getElementById('move-counter');
 const recordScore = document.getElementById('record-score');
@@ -42,7 +39,9 @@ if (bestScore !== null) {
     recordScore.textContent = '0';
 }
 
-// Initialize the game board with cards
+/**
+ * Initialize the game board with cards
+ */
 function initializeBoard() {
     gameBoard.innerHTML = '';
     const images = uniqueImages.concat(uniqueImages).sort(() => 0.5 - Math.random());
