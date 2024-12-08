@@ -1,3 +1,5 @@
+![Archived](https://img.shields.io/badge/status-archived-red)
+
 # WoW Memory Game
 
 ## A little memory game with a WoW skin
